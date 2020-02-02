@@ -1,0 +1,17 @@
+{
+  "extends": "walmart/configurations/es6-browser",
+  "plugins": [
+    "jest"
+  ],
+  "env": {
+    "jest/globals": true
+  },
+  "rules": {
+    "no-unused-vars": [
+      "error",
+      {
+        "args": "none"
+      }
+    ]
+  }
+}

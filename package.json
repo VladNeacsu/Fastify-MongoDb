@@ -1,0 +1,35 @@
+{
+  "name": "optilyz-project",
+  "version": "0.1.0",
+  "description": "Home Project",
+  "main": "index.js",
+  "author": "Vlad Neacsu",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "node index.js",
+    "debug": "nodemon --inspect index.js",
+    "test": "jest --runInBand",
+    "test:watch": "jest --runInBand --watch"
+  },
+  "dependencies": {
+    "bcrypt": "^3.0.7",
+    "dotenv": "^8.2.0",
+    "fastify": "^2.11.0",
+    "fastify-jwt": "^1.2.1",
+    "fastify-plugin": "^1.6.0",
+    "http-status-codes": "^1.4.0",
+    "mongoose": "^5.8.10",
+    "mongoose-validator": "^2.1.0",
+    "pino-pretty": "^3.5.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.3",
+    "eslint": "^6.8.0",
+    "eslint-config-walmart": "^2.2.1",
+    "eslint-plugin-filenames": "^1.3.2",
+    "eslint-plugin-jest": "^23.6.0",
+    "jest": "^25.1.0",
+    "supertest": "^4.0.2"
+  }
+}
