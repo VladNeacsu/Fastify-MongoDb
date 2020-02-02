@@ -19,7 +19,9 @@
     "fastify-jwt": "^1.2.1",
     "fastify-plugin": "^1.6.0",
     "http-status-codes": "^1.4.0",
+    "mongodb-memory-server": "^6.2.4",
     "mongoose": "^5.8.10",
+    "mongoose-unique-validator": "^2.0.3",
     "mongoose-validator": "^2.1.0",
     "pino-pretty": "^3.5.0"
   },

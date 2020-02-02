@@ -1,8 +1,7 @@
 const httpStatusCodes = require("http-status-codes");
 const buildFastify = require("../src/server");
-const mongoose = require("mongoose");
 
-const mongoUrlTestDb = "mongodb://localhost/testdb";
+const testDb = require("../src/helpers/in-memory-db-handler");
 
 process.env.NODE_ENV = "testing";
 process.env.JWT_SECRET = "the crystal method";
@@ -11,14 +10,14 @@ describe("Test Login Endpoint", () => {
   const fastify = buildFastify();
 
   beforeAll(async done => {
-    await mongoose.connect(mongoUrlTestDb, { useNewUrlParser: true, useUnifiedTopology: true });
+    await testDb.connect();
     done();
   });
 
   afterAll(async done => {
     // Cleanup and Disconnect
-    await mongoose.connection.db.dropDatabase();
-    await mongoose.connection.close();
+    await testDb.clearDatabase();
+    await testDb.closeDatabase();
 
     await fastify.close();
 
@@ -72,7 +71,7 @@ describe("Test Task Endpoints", () => {
   let taskId;
 
   beforeAll(async done => {
-    await mongoose.connect(mongoUrlTestDb, { useNewUrlParser: true, useUnifiedTopology: true });
+    await testDb.connect();
 
     // Create the user that will be used to login in the API
     const createUserResponse = await fastify.inject({
@@ -101,8 +100,8 @@ describe("Test Task Endpoints", () => {
 
   afterAll(async done => {
     // Cleanup and Disconnect
-    await mongoose.connection.db.dropDatabase();
-    await mongoose.connection.close();
+    await testDb.clearDatabase();
+    await testDb.closeDatabase();
 
     await fastify.close();
 

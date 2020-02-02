@@ -4,6 +4,8 @@
 const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
 const validator = require("mongoose-validator");
+const uniqueValidator = require("mongoose-unique-validator");
+
 const TaskModel = require("./task");
 
 const UserSchema = new Schema({
@@ -14,6 +16,7 @@ const UserSchema = new Schema({
   email: {
     type: String,
     required: true,
+    unique: true,
     validate: validator({
       validator: "isEmail"
     })
@@ -41,6 +44,9 @@ UserSchema.pre("save", async function (next) {
 
   return next();
 });
+
+// Register plugins
+UserSchema.plugin(uniqueValidator);
 
 // Methods
 UserSchema.methods = {
