@@ -2,7 +2,7 @@ const UserModel = require("../models/user");
 const httpStatusCodes = require("http-status-codes");
 
 const UserController = {
-  async getUser(req, res) {
+  async getUser(req, reply) {
     return UserModel.findOne({
       _id: req.user._id
     }).populate("tasks");

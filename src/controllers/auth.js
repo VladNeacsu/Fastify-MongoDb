@@ -8,9 +8,7 @@ const AuthController = {
       const { email, password } = req.body;
 
       if (!email || !password) {
-        return reply.code(httpStatus.INTERNAL_SERVER_ERROR).send({
-          message: "No email or password supplied"
-        });
+        throw new Error("No email or password supplied");
       }
 
       const user = await UserModel.findOne({
@@ -18,9 +16,7 @@ const AuthController = {
       });
 
       if (!user) {
-        return reply.send({
-          message: "Cannot find user"
-        });
+        throw new Error("Cannot find user");
       }
 
       const isValidPassword = await user.checkPassword(password);
@@ -31,7 +27,7 @@ const AuthController = {
         });
       }
 
-      // this is bound to the Fastify instance
+      // this is automatically bound to the Fastify instance
       const token = this.jwt.sign(user.toObject());
 
       return {

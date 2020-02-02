@@ -1,3 +1,6 @@
+/* eslint-disable consistent-this */
+/* eslint-disable no-invalid-this */
+
 const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
 const validator = require("mongoose-validator");
@@ -26,10 +29,9 @@ const UserSchema = new Schema({
   timestamps: true
 });
 
-UserSchema.set("autoIndex", false);
-
 // Hooks
 UserSchema.pre("save", async function (next) {
+  // Had to disable eslint for THIS on this line. Couldn't find workaround
   const user = this;
 
   if (user.password && user.isModified("password")) {

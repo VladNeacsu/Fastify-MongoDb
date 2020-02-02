@@ -5,11 +5,9 @@ const _fastify = require("fastify");
 const buildFastify = () => {
 
   let loggerOptions = { prettyPrint: true };
-  let jwtSecret = process.env.JWT_SECRET;
 
   if (process.env.NODE_ENV === "testing") {
     loggerOptions = false;
-    jwtSecret = "testing secrets";
   }
 
   const fastify = _fastify({
@@ -19,7 +17,7 @@ const buildFastify = () => {
   // Register Plugins
   fastify.register(require("./middleware/authenticate"));
   fastify.register(jwt, {
-    secret: jwtSecret
+    secret: process.env.JWT_SECRET
   });
 
   // Register Routes

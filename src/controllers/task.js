@@ -1,5 +1,6 @@
 const TaskModel = require("../models/task");
 const UserModel = require("../models/user");
+const httpStatusCodes = require("http-status-codes");
 
 const TaskController = {
   async getTaskById(req, reply) {
@@ -27,7 +28,7 @@ const TaskController = {
       user.tasks.push(newTask);
       await user.save();
 
-      return newTask;
+      return reply.code(httpStatusCodes.CREATED).send(newTask);
     } catch (err) {
       throw err;
     }
