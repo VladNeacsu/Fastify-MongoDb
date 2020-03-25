@@ -1,5 +1,6 @@
 const UserModel = require("../models/user");
 const httpStatusCodes = require("http-status-codes");
+const { UniqueResourceError } = require("../errors/api-errors");
 
 const UserController = {
   async getUser(req, reply) {
@@ -20,6 +21,10 @@ const UserController = {
 
       return reply.code(httpStatusCodes.CREATED).send(newUser);
     } catch (err) {
+      if (err.errors && err.errors.email && err.errors.email.properties && err.errors.email.properties.type === "unique") {
+        return new UniqueResourceError();
+      }
+
       throw err;
     }
   }
